@@ -4,6 +4,18 @@
   #define YYSTYPE double
   int yylex();
   void yyerror(const char *s);
+
+  struct treenode
+  {
+    union
+    {
+      int i;
+      float f;
+      char c;
+    }val;
+    struct treenode *left;
+    struct treenode *right;
+  };
 %}
 
 %token IF ELSE WHILE
@@ -18,6 +30,10 @@
 %token L_PAREN R_PAREN L_FLOWBRACE R_FLOWBRACE L_SQBRACE R_SQBRACE
 %token SEMICOLON
 
+%right ASSIGN PLUS_ASSIGN MINUS_ASSIGN MUL_ASSIGN DIV_ASSIGN AND_ASSIGN OR_ASSIGN XOR_ASSIGN MOD_ASSIGN L_SHIFT_ASSIGN R_SHIFT_ASSIGN
+%left PLUS MINUS MULTIPLY DIVIDE L_SHIFT R_SHIFT MOD LE LT GE GT NE EQ
+
+
 %start S
 
 %%
@@ -30,7 +46,13 @@ multiple_statements : multiple_statements statement
                    | statement
 
 statement : expr SEMICOLON
+          | whilestatement
           | SEMICOLON
+
+whilestatement : WHILE condition block
+               | WHILE condition statement
+
+condition : L_PAREN expr R_PAREN
 
 expr : expr assignment exprOR
      | exprOR
