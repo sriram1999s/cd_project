@@ -1,0 +1,14 @@
+while(i<10)
+{
+  while(k>100)
+  k--;
+  while(j<20)
+  {
+    while(x<30)
+    while(y<30)
+    {
+      o--;
+    }
+
+  }
+}

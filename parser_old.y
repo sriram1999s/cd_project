@@ -4,6 +4,18 @@
   #define YYSTYPE double
   int yylex();
   void yyerror(const char *s);
+
+  struct treenode
+  {
+    union
+    {
+      int i;
+      float f;
+      char c;
+    }val;
+    struct treenode *left;
+    struct treenode *right;
+  };
 %}
 
 %token IF ELSE WHILE
@@ -18,6 +30,10 @@
 %token L_PAREN R_PAREN L_FLOWBRACE R_FLOWBRACE L_SQBRACE R_SQBRACE
 %token SEMICOLON
 
+%right ASSIGN PLUS_ASSIGN MINUS_ASSIGN MUL_ASSIGN DIV_ASSIGN AND_ASSIGN OR_ASSIGN XOR_ASSIGN MOD_ASSIGN L_SHIFT_ASSIGN R_SHIFT_ASSIGN
+%left PLUS MINUS MULTIPLY DIVIDE L_SHIFT R_SHIFT MOD LE LT GE GT NE EQ
+
+
 %start S
 
 %%
@@ -30,17 +46,80 @@ multiple_statements : multiple_statements statement
                    | statement
 
 statement : expr SEMICOLON
+          | whilestatement
+          | SEMICOLON
 
-expr : expr PLUS term
-     | expr MINUS term
+
+whilestatement : WHILE condition block
+               | WHILE condition statement
+
+condition : L_PAREN expr R_PAREN
+
+expr : expr assignment exprOR
+     | exprOR
+
+assignment : ASSIGN
+           | PLUS_ASSIGN
+           | MINUS_ASSIGN
+           | MUL_ASSIGN
+           | DIV_ASSIGN
+           | AND_ASSIGN
+           | OR_ASSIGN
+           | XOR_ASSIGN
+           | MOD_ASSIGN
+           | L_SHIFT_ASSIGN
+           | R_SHIFT_ASSIGN
+
+exprOR : exprOR OR exprAND
+       | exprAND
+
+exprAND : exprAND AND exprBITOR
+        | exprBITOR
+
+exprBITOR : exprBITOR BIT_OR exprBITXOR
+          | exprBITXOR
+
+exprBITXOR : exprBITXOR BIT_XOR exprBITAND
+           | exprBITAND
+
+exprBITAND : exprBITAND BIT_AND exprEQ
+           | exprEQ
+
+exprEQ : exprEQ EQ exprRELOP
+       | exprEQ NE exprRELOP
+       | exprRELOP
+
+exprRELOP : exprRELOP relop exprSHIFT
+          | exprSHIFT
+
+relop : LE
+      | LT
+      | GE
+      | GT
+
+exprSHIFT : exprSHIFT L_SHIFT exprOP
+          | exprSHIFT R_SHIFT exprOP
+          | exprOP
+
+exprOP : exprOP PLUS term
+     | exprOP MINUS term
      | term
 
 term : term MULTIPLY factor
      | term DIVIDE factor
+     | term MOD factor
      | factor
 
-factor : L_PAREN expr R_PAREN
+factor : NOT factor
+       | PLUS factor
        | MINUS factor
+       | PLUS_PLUS factor
+       | MINUS_MINUS factor
+       | brace
+
+brace  : L_PAREN expr R_PAREN
+       | brace PLUS_PLUS
+       | brace MINUS_MINUS
        | INT_NUM
        | FLOAT_NUM
        | ID

@@ -38,19 +38,28 @@
 
 %%
 S : multiple_statements
-  | block
+
+multiple_statements : multiple_statements statement
+                    | statement
+
+statement : open
+          | closed
+
+open : IF condition statement
+     | IF condition closed ELSE open
+     | WHILE condition open
+
+closed : simple
+       | block
+       | IF condition closed ELSE closed
+       | WHILE condition closed
+
 
 block : L_FLOWBRACE multiple_statements R_FLOWBRACE
 
-multiple_statements : multiple_statements statement
-                   | statement
 
-statement : expr SEMICOLON
-          | whilestatement
-          | SEMICOLON
-
-whilestatement : WHILE condition block
-               | WHILE condition statement
+simple : expr SEMICOLON
+       | SEMICOLON
 
 condition : L_PAREN expr R_PAREN
 
@@ -116,7 +125,7 @@ factor : NOT factor
        | MINUS_MINUS factor
        | brace
 
-brace  :  L_PAREN expr R_PAREN
+brace  : L_PAREN expr R_PAREN
        | brace PLUS_PLUS
        | brace MINUS_MINUS
        | INT_NUM
