@@ -351,8 +351,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 51
-#define YY_END_OF_BUFFER 52
+#define YY_NUM_RULES 52
+#define YY_END_OF_BUFFER 53
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -362,13 +362,13 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[80] =
     {   0,
-       50,   50,   52,   51,   50,   36,   23,   37,   43,   44,
-       21,   19,   20,   22,    9,   49,   14,   51,   16,   10,
-       47,   48,   39,   10,   10,   10,   10,   10,   45,   38,
-       46,   40,   50,   17,   31,   34,   28,   26,   11,   24,
-       12,   25,    1,   27,    0,    9,   41,   13,   18,   15,
-       42,   10,   30,   10,   10,   10,    2,   10,   10,   29,
-       35,    1,    8,   32,   33,   10,   10,   10,    5,   10,
+       51,   51,   53,   52,   51,   37,   23,   38,   44,   45,
+       21,   19,   20,   22,    9,   50,   14,   34,   16,   10,
+       48,   49,   40,   10,   10,   10,   10,   10,   46,   39,
+       47,   41,   51,   17,   31,   35,   28,   26,   11,   24,
+       12,   25,    1,   27,    0,    9,   42,   13,   18,   15,
+       43,   10,   30,   10,   10,   10,    2,   10,   10,   29,
+       36,    1,    8,   32,   33,   10,   10,   10,    5,   10,
         0,    7,    3,   10,   10,    8,    6,    4,    0
     } ;
 
@@ -938,95 +938,100 @@ YY_RULE_SETUP
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 51 "lexer.l"
-{printf("detected logop : "); ECHO; printf("    "); return AND;}
+#line 50 "lexer.l"
+{printf("detected assignment : "); ECHO; printf("    "); return ASSIGN;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 52 "lexer.l"
-{printf("detected logop : "); ECHO; printf("    "); return OR;}
+#line 53 "lexer.l"
+{printf("detected logop : "); ECHO; printf("    "); return AND;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 53 "lexer.l"
-{printf("detected logop : "); ECHO; printf("    "); return NOT;}
+#line 54 "lexer.l"
+{printf("detected logop : "); ECHO; printf("    "); return OR;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 55 "lexer.l"
-{printf("detected bitwiseop : "); ECHO; printf("    "); return BIT_AND;}
+{printf("detected logop : "); ECHO; printf("    "); return NOT;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 56 "lexer.l"
-{printf("detected bitwiseop : "); ECHO; printf("    "); return BIT_OR;}
+#line 57 "lexer.l"
+{printf("detected bitwiseop : "); ECHO; printf("    "); return BIT_AND;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 57 "lexer.l"
-{printf("detected bitwiseop : "); ECHO; printf("    "); return BIT_XOR;}
+#line 58 "lexer.l"
+{printf("detected bitwiseop : "); ECHO; printf("    "); return BIT_OR;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 58 "lexer.l"
-{printf("detected bitwiseop : "); ECHO; printf("    "); return BIT_COMP;}
+#line 59 "lexer.l"
+{printf("detected bitwiseop : "); ECHO; printf("    "); return BIT_XOR;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 59 "lexer.l"
-{printf("detected bitwiseop : "); ECHO; printf("    "); return L_SHIFT;}
+#line 60 "lexer.l"
+{printf("detected bitwiseop : "); ECHO; printf("    "); return BIT_COMP;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 60 "lexer.l"
-{printf("detected bitwiseop : "); ECHO; printf("    "); return R_SHIFT;}
+#line 61 "lexer.l"
+{printf("detected bitwiseop : "); ECHO; printf("    "); return L_SHIFT;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 62 "lexer.l"
-{printf("detected bracket : "); ECHO; printf("    "); return L_PAREN;}
+{printf("detected bitwiseop : "); ECHO; printf("    "); return R_SHIFT;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 63 "lexer.l"
-{printf("detected bracket : "); ECHO; printf("    "); return R_PAREN;}
+#line 64 "lexer.l"
+{printf("detected bracket : "); ECHO; printf("    "); return L_PAREN;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 64 "lexer.l"
-{printf("detected bracket : "); ECHO; printf("    "); return L_FLOWBRACE;}
+#line 65 "lexer.l"
+{printf("detected bracket : "); ECHO; printf("    "); return R_PAREN;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 65 "lexer.l"
-{printf("detected bracket : "); ECHO; printf("    "); return R_FLOWBRACE;}
+#line 66 "lexer.l"
+{printf("detected bracket : "); ECHO; printf("    "); return L_FLOWBRACE;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 66 "lexer.l"
-{printf("detected bracket : "); ECHO; printf("    "); return L_SQBRACE;}
+#line 67 "lexer.l"
+{printf("detected bracket : "); ECHO; printf("    "); return R_FLOWBRACE;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 67 "lexer.l"
-{printf("detected bracket : "); ECHO; printf("    "); return R_SQBRACE;}
+#line 68 "lexer.l"
+{printf("detected bracket : "); ECHO; printf("    "); return L_SQBRACE;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
 #line 69 "lexer.l"
-{printf("detected semicolon : "); ECHO; printf("     "); return SEMICOLON;}
+{printf("detected bracket : "); ECHO; printf("    "); return R_SQBRACE;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
 #line 71 "lexer.l"
-printf("TAB ");
+{printf("detected semicolon : "); ECHO; printf("     "); return SEMICOLON;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
 #line 73 "lexer.l"
+printf("TAB ");
+	YY_BREAK
+case 52:
+YY_RULE_SETUP
+#line 75 "lexer.l"
 ECHO;
 	YY_BREAK
-#line 1030 "lex.yy.c"
+#line 1035 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2031,7 +2036,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 73 "lexer.l"
-
+#line 75 "lexer.l"
 
 

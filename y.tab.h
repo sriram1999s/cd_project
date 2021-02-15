@@ -78,30 +78,31 @@ extern int yydebug;
     GT = 279,                      /* GT  */
     NE = 280,                      /* NE  */
     EQ = 281,                      /* EQ  */
-    PLUS_ASSIGN = 282,             /* PLUS_ASSIGN  */
-    MINUS_ASSIGN = 283,            /* MINUS_ASSIGN  */
-    MUL_ASSIGN = 284,              /* MUL_ASSIGN  */
-    DIV_ASSIGN = 285,              /* DIV_ASSIGN  */
-    AND_ASSIGN = 286,              /* AND_ASSIGN  */
-    OR_ASSIGN = 287,               /* OR_ASSIGN  */
-    XOR_ASSIGN = 288,              /* XOR_ASSIGN  */
-    MOD_ASSIGN = 289,              /* MOD_ASSIGN  */
-    L_SHIFT_ASSIGN = 290,          /* L_SHIFT_ASSIGN  */
-    R_SHIFT_ASSIGN = 291,          /* R_SHIFT_ASSIGN  */
-    AND = 292,                     /* AND  */
-    OR = 293,                      /* OR  */
-    NOT = 294,                     /* NOT  */
-    BIT_AND = 295,                 /* BIT_AND  */
-    BIT_OR = 296,                  /* BIT_OR  */
-    BIT_XOR = 297,                 /* BIT_XOR  */
-    BIT_COMP = 298,                /* BIT_COMP  */
-    L_PAREN = 299,                 /* L_PAREN  */
-    R_PAREN = 300,                 /* R_PAREN  */
-    L_FLOWBRACE = 301,             /* L_FLOWBRACE  */
-    R_FLOWBRACE = 302,             /* R_FLOWBRACE  */
-    L_SQBRACE = 303,               /* L_SQBRACE  */
-    R_SQBRACE = 304,               /* R_SQBRACE  */
-    SEMICOLON = 305                /* SEMICOLON  */
+    ASSIGN = 282,                  /* ASSIGN  */
+    PLUS_ASSIGN = 283,             /* PLUS_ASSIGN  */
+    MINUS_ASSIGN = 284,            /* MINUS_ASSIGN  */
+    MUL_ASSIGN = 285,              /* MUL_ASSIGN  */
+    DIV_ASSIGN = 286,              /* DIV_ASSIGN  */
+    AND_ASSIGN = 287,              /* AND_ASSIGN  */
+    OR_ASSIGN = 288,               /* OR_ASSIGN  */
+    XOR_ASSIGN = 289,              /* XOR_ASSIGN  */
+    MOD_ASSIGN = 290,              /* MOD_ASSIGN  */
+    L_SHIFT_ASSIGN = 291,          /* L_SHIFT_ASSIGN  */
+    R_SHIFT_ASSIGN = 292,          /* R_SHIFT_ASSIGN  */
+    AND = 293,                     /* AND  */
+    OR = 294,                      /* OR  */
+    NOT = 295,                     /* NOT  */
+    BIT_AND = 296,                 /* BIT_AND  */
+    BIT_OR = 297,                  /* BIT_OR  */
+    BIT_XOR = 298,                 /* BIT_XOR  */
+    BIT_COMP = 299,                /* BIT_COMP  */
+    L_PAREN = 300,                 /* L_PAREN  */
+    R_PAREN = 301,                 /* R_PAREN  */
+    L_FLOWBRACE = 302,             /* L_FLOWBRACE  */
+    R_FLOWBRACE = 303,             /* R_FLOWBRACE  */
+    L_SQBRACE = 304,               /* L_SQBRACE  */
+    R_SQBRACE = 305,               /* R_SQBRACE  */
+    SEMICOLON = 306                /* SEMICOLON  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -133,30 +134,31 @@ extern int yydebug;
 #define GT 279
 #define NE 280
 #define EQ 281
-#define PLUS_ASSIGN 282
-#define MINUS_ASSIGN 283
-#define MUL_ASSIGN 284
-#define DIV_ASSIGN 285
-#define AND_ASSIGN 286
-#define OR_ASSIGN 287
-#define XOR_ASSIGN 288
-#define MOD_ASSIGN 289
-#define L_SHIFT_ASSIGN 290
-#define R_SHIFT_ASSIGN 291
-#define AND 292
-#define OR 293
-#define NOT 294
-#define BIT_AND 295
-#define BIT_OR 296
-#define BIT_XOR 297
-#define BIT_COMP 298
-#define L_PAREN 299
-#define R_PAREN 300
-#define L_FLOWBRACE 301
-#define R_FLOWBRACE 302
-#define L_SQBRACE 303
-#define R_SQBRACE 304
-#define SEMICOLON 305
+#define ASSIGN 282
+#define PLUS_ASSIGN 283
+#define MINUS_ASSIGN 284
+#define MUL_ASSIGN 285
+#define DIV_ASSIGN 286
+#define AND_ASSIGN 287
+#define OR_ASSIGN 288
+#define XOR_ASSIGN 289
+#define MOD_ASSIGN 290
+#define L_SHIFT_ASSIGN 291
+#define R_SHIFT_ASSIGN 292
+#define AND 293
+#define OR 294
+#define NOT 295
+#define BIT_AND 296
+#define BIT_OR 297
+#define BIT_XOR 298
+#define BIT_COMP 299
+#define L_PAREN 300
+#define R_PAREN 301
+#define L_FLOWBRACE 302
+#define R_FLOWBRACE 303
+#define L_SQBRACE 304
+#define R_SQBRACE 305
+#define SEMICOLON 306
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

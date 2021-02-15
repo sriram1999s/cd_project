@@ -47,6 +47,8 @@ char {printf("detected keyword : "); ECHO; printf("    "); return CHAR_K;}
 "%=" {printf("detected assignment : "); ECHO; printf("    "); return MOD_ASSIGN;}
 "<<=" {printf("detected assignment : "); ECHO; printf("    "); return L_SHIFT_ASSIGN;}
 ">>=" {printf("detected assignment : "); ECHO; printf("    "); return R_SHIFT_ASSIGN;}
+"=" {printf("detected assignment : "); ECHO; printf("    "); return ASSIGN;}
+
 
 "&&" {printf("detected logop : "); ECHO; printf("    "); return AND;}
 "||" {printf("detected logop : "); ECHO; printf("    "); return OR;}
@@ -71,4 +73,3 @@ char {printf("detected keyword : "); ECHO; printf("    "); return CHAR_K;}
 [\t]* printf("TAB ");
 
 %%
-
