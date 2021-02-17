@@ -1,7 +1,18 @@
 %{
-#include<stdio.h>
-#include "y.tab.h"
+  #include<stdio.h>
+  #include<string.h>
+  #include "y.tab.h"
+  typedef struct Symbol_Table
+  {
+    char *name;
+    int ix;
+  }SYMTAB;
+  void add_to_tab(char *);
+  void display_tab();
+  void delete_tab();
+  #define SYMTABSIZE 10
 %}
+
 
 
 %%
@@ -17,7 +28,7 @@ char {printf("detected keyword : "); ECHO; printf("    "); return CHAR_K;}
 
 [0-9]+\.[0-9]+([eE][0-9]+)? {printf("float : "); ECHO; printf("    "); return FLOAT_NUM;}
 [0-9]+ {printf("int : "); ECHO; printf("    "); return INT_NUM;}
-[A-Za-z_][A-Za-z0-9_]* {printf("id : "); ECHO; printf("    "); return ID;}
+[A-Za-z_][A-Za-z0-9_]* {/*printf("id : "); ECHO;*/  add_to_tab(yytext); printf("    "); return ID;}
 
 "++" {printf("detected unary : "); ECHO; printf("    "); return PLUS_PLUS;}
 "--" {printf("detected unary : "); ECHO; printf("    "); return MINUS_MINUS;}
@@ -68,8 +79,40 @@ char {printf("detected keyword : "); ECHO; printf("    "); return CHAR_K;}
 "[" {printf("detected bracket : "); ECHO; printf("    "); return L_SQBRACE;}
 "]" {printf("detected bracket : "); ECHO; printf("    "); return R_SQBRACE;}
 
-";" {printf("detected semicolon : "); ECHO; printf("     "); return SEMICOLON;}
+";" {printf("detected semicolon : "); ECHO; printf("     "); display_tab(); return SEMICOLON;}
 
 [\t]* printf("TAB ");
-
 %%
+
+SYMTAB sym_tab[SYMTABSIZE];
+int curr_ptr = 0;
+
+void add_to_tab(char *name)
+{
+  if(curr_ptr < SYMTABSIZE)
+  {
+    printf("Adding to table ...ID : %s\n", name);
+    sym_tab[curr_ptr].name = malloc(strlen(name) + 1);
+    strcpy(sym_tab[curr_ptr].name, name);
+    sym_tab[curr_ptr].ix = curr_ptr;
+    ++curr_ptr;
+
+  }
+}
+
+void display_tab()
+{
+  printf("\nDisplaying table ...\n");
+  for(int i = 0; i < SYMTABSIZE; ++i)
+  {
+    printf("\tname : %s , index : %d\n", sym_tab[i].name, sym_tab[i].ix);
+  }
+}
+void delete_tab()
+{
+  printf("\nDeleting table ...\n");
+  for(int i = 0; i < SYMTABSIZE; ++i)
+  {
+    free(sym_tab[i].name);
+  }
+}

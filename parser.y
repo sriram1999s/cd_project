@@ -16,6 +16,7 @@
     struct treenode *left;
     struct treenode *right;
   };
+
 %}
 
 %token IF ELSE WHILE
@@ -132,6 +133,8 @@ brace  : L_PAREN expr R_PAREN
        | FLOAT_NUM
        | ID
 %%
+
+
 
 void yyerror(s)
 const char *s;
