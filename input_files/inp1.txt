@@ -1,15 +1,21 @@
-if(a<5)
+#include <stdio.h>
+#include "temp.h"
+void sum();
+int main()
 {
-  if(j>2)
-  while(k<10)
-  --k;
-  if(h==3)
-  ++h;
-  else
+  if(a<5)
   {
-    i+=7;
+    if(j>2)
+    while(k<10)
+    --k;
+    if(h==3)
+    ++h;
+    else
+    {
+      i+=7;
+    }
+    p++;
   }
-  p++;
+  else
+  d*=7;
 }
-else
-d*=7;

@@ -1,26 +1,47 @@
 %{
   #include<stdio.h>
   #include<ctype.h>
+  #include<string.h>
   #define YYSTYPE double
+  #include "symbol_table.h"
+  #include<assert.h>
+
   int yylex();
   void yyerror(const char *s);
+  int tokval;
+  SYMTAB sym_tab[SYMTABSIZE];
+  int curr_ptr = 0;
 
-  struct treenode
+  typedef struct treenode
   {
+    /*
     union
     {
       int i;
       float f;
-      char c;
-    }val;
+      char* c;
+      char* s;
+    }val;*/
+
+    char *s;
     struct treenode *left;
     struct treenode *right;
-  };
 
+  } Tnode_t;
+
+  typedef struct syntaxtree
+  {
+    Tnode_t *head;
+  }Tree_t;
+
+  Tree_t tree;
+
+  void  add_to_tree();
+  Tnode_t *create_node(char *);
 %}
 
 %token IF ELSE WHILE
-%token INT_K FLOAT_K CHAR_K
+%token INT_K FLOAT_K CHAR_K VOID_K
 %token INT_NUM FLOAT_NUM ID
 %token PLUS_PLUS MINUS_MINUS
 %token PLUS MINUS MULTIPLY DIVIDE L_SHIFT R_SHIFT MOD
@@ -30,15 +51,17 @@
 %token BIT_AND BIT_OR BIT_XOR BIT_COMP
 %token L_PAREN R_PAREN L_FLOWBRACE R_FLOWBRACE L_SQBRACE R_SQBRACE
 %token SEMICOLON
+%token HASH INCLUDE DOUBLE_QUOTES HEADER
+
 
 %right ASSIGN PLUS_ASSIGN MINUS_ASSIGN MUL_ASSIGN DIV_ASSIGN AND_ASSIGN OR_ASSIGN XOR_ASSIGN MOD_ASSIGN L_SHIFT_ASSIGN R_SHIFT_ASSIGN
 %left PLUS MINUS MULTIPLY DIVIDE L_SHIFT R_SHIFT MOD LE LT GE GT NE EQ
 
 
-%start S
+%start program
 
 %%
-S : multiple_statements
+program : multiple_statements {display_tab(); delete_tab();}
 
 multiple_statements : multiple_statements statement
                     | statement
@@ -60,7 +83,22 @@ block : L_FLOWBRACE multiple_statements R_FLOWBRACE
 
 
 simple : expr SEMICOLON
+       | HASH INCLUDE header
+       | declaration
+       | ID L_PAREN R_PAREN SEMICOLON
        | SEMICOLON
+
+declaration : type ID SEMICOLON
+            | type ID ASSIGN expr SEMICOLON
+            | type ID L_PAREN R_PAREN SEMICOLON
+            | type ID L_PAREN R_PAREN block
+
+type : INT_K
+     | FLOAT_K
+     | CHAR_K
+     | VOID_K
+header : LT HEADER GT
+       | DOUBLE_QUOTES HEADER DOUBLE_QUOTES
 
 condition : L_PAREN expr R_PAREN
 
@@ -131,9 +169,67 @@ brace  : L_PAREN expr R_PAREN
        | brace MINUS_MINUS
        | INT_NUM
        | FLOAT_NUM
-       | ID
+       | ID {assert(sym_tab[tokval].ix == tokval); printf("ID : %s : %d",sym_tab[tokval].name , sym_tab[tokval].ix);}
 %%
 
+// syntax tree functions begin
+
+void  add_to_tree()
+{
+
+}
+Tnode_t *create_node(char *s)
+{
+  Tnode_t *temp = (Tnode_t*)malloc(sizeof(Tnode_t));
+  temp->s = strdup(s);
+  temp->left = NULL;
+  temp->right = NULL;
+  return temp;
+}
+// syntax tree functions end
+
+
+// symbol table functions begin
+int add_to_tab(char *name)
+{
+  if(curr_ptr < SYMTABSIZE)
+  {
+    for(int i = 0; i < curr_ptr; ++i)
+    {
+      if(!strcmp(name,sym_tab[i].name))
+      {
+        printf("Symbol already present\n");
+        return i;
+      }
+    }
+    printf("Adding to table ...ID : %s\n", name);
+    sym_tab[curr_ptr].name = malloc(strlen(name) + 1);
+    strcpy(sym_tab[curr_ptr].name, name);
+    sym_tab[curr_ptr].ix = curr_ptr;
+    ++curr_ptr;
+
+    return sym_tab[curr_ptr-1].ix;
+  }
+  return -1;
+}
+
+void display_tab()
+{
+  printf("\nDisplaying table ...\n");
+  for(int i = 0; i < SYMTABSIZE; ++i)
+  {
+    printf("\tname : %s , index : %d\n", sym_tab[i].name, sym_tab[i].ix);
+  }
+}
+void delete_tab()
+{
+  printf("\nDeleting table ...\n");
+  for(int i = 0; i < SYMTABSIZE; ++i)
+  {
+    free(sym_tab[i].name);
+  }
+}
+// symbol table functions end
 
 
 void yyerror(s)

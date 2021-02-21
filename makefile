@@ -4,4 +4,5 @@ default:
 	yacc -d parser.y
 	cc lex.yy.c y.tab.c -ll
 clean:
-	$(RM) *.o lex.yy.cc y.tab.c y.tab.h
+	$(RM) *.o y.tab.c y.tab.h a.out
+	rm lex.yy.c
