@@ -37,7 +37,7 @@
   Tree_t tree;
 
   void  add_to_tree();
-  Tnode_t *create_node(char *);
+  Tnode_t * node(char *, Tnode_t *, Tnode_t *);
 %}
 
 %token IF ELSE WHILE
@@ -174,16 +174,12 @@ brace  : L_PAREN expr R_PAREN
 
 // syntax tree functions begin
 
-void  add_to_tree()
-{
-
-}
-Tnode_t *create_node(char *s)
+Tnode_t * node(char *s, Tnode_t *left, Tnode_t *right)
 {
   Tnode_t *temp = (Tnode_t*)malloc(sizeof(Tnode_t));
   temp->s = strdup(s);
-  temp->left = NULL;
-  temp->right = NULL;
+  temp->left = left;
+  temp->right = right;
   return temp;
 }
 // syntax tree functions end
