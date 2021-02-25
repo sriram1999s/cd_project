@@ -4,6 +4,7 @@
   #include "y.tab.h"
   #include "symbol_table.h"
   extern int tokval;
+  extern int lineno;
 %}
 
 
@@ -24,7 +25,7 @@ include {return INCLUDE;}
 
 [0-9]+\.[0-9]+([eE][0-9]+)? { return FLOAT_NUM;}
 [0-9]+ { return INT_NUM;}
-[A-Za-z_][A-Za-z0-9_]* {  tokval = add_to_tab(yytext);return ID;}
+[A-Za-z_][A-Za-z0-9_]* {  tokval = add_to_tab(yytext, lineno);return ID;}
 
 "++" { return PLUS_PLUS;}
 "--" { return MINUS_MINUS;}
@@ -81,4 +82,5 @@ include {return INCLUDE;}
 "\"" {return DOUBLE_QUOTES;}
 
 [\t]* printf("TAB ");
+[\n] {++lineno;}
 %%

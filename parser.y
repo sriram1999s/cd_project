@@ -9,6 +9,7 @@
   int yylex();
   void yyerror(const char *s);
   int tokval;
+  int lineno =1;
   SYMTAB sym_tab[SYMTABSIZE];
   int curr_ptr = 0;
 
@@ -62,6 +63,7 @@
 
 %%
 program : multiple_statements {display_tab(); delete_tab();}
+
 
 multiple_statements : multiple_statements statement
                     | statement
@@ -186,7 +188,7 @@ Tnode_t * node(char *s, Tnode_t *left, Tnode_t *right)
 
 
 // symbol table functions begin
-int add_to_tab(char *name)
+int add_to_tab(char *name, int line_no)
 {
   if(curr_ptr < SYMTABSIZE)
   {
@@ -202,6 +204,9 @@ int add_to_tab(char *name)
     sym_tab[curr_ptr].name = malloc(strlen(name) + 1);
     strcpy(sym_tab[curr_ptr].name, name);
     sym_tab[curr_ptr].ix = curr_ptr;
+    sym_tab[curr_ptr].line_no = line_no;
+    sym_tab[curr_ptr].type = NULL;
+    sym_tab[curr_ptr].width = 0;
     ++curr_ptr;
 
     return sym_tab[curr_ptr-1].ix;
@@ -214,7 +219,7 @@ void display_tab()
   printf("\nDisplaying table ...\n");
   for(int i = 0; i < SYMTABSIZE; ++i)
   {
-    printf("\tname : %s , index : %d\n", sym_tab[i].name, sym_tab[i].ix);
+    printf("\tname : %s , index : %d , type : %s , width : %d , first found at line : %d\n", sym_tab[i].name, sym_tab[i].ix, sym_tab[i].type, sym_tab[curr_ptr].width, sym_tab[curr_ptr].line_no);
   }
 }
 void delete_tab()
@@ -231,7 +236,7 @@ void delete_tab()
 void yyerror(s)
 const char *s;
 {
-  fprintf(stderr, "%s\n",s);
+  fprintf(stderr, "%s in line %d\n",s , lineno);
 }
 
 int yywrap()
@@ -243,3 +248,5 @@ int main()
 {
   return yyparse();
 }
+
+// | error { yyerrok; yyclearin;}
