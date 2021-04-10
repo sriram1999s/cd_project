@@ -1,8 +1,5 @@
 default:
-	clear
-	lex lexer.l
-	yacc -d parser.y
-	cc lex.yy.c y.tab.c -ll
+	python3 controller.py $(argument)
 clean:
-	$(RM) *.o y.tab.c y.tab.h a.out
-	rm lex.yy.c
+	rm parser.out parsetab.py 
+	rm -r __pycache__

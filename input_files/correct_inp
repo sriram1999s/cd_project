@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include "temp.h"
-void sum();
+void foo();
 int main()
 {
+  int a;
+  int b  = 5;
+  
   if(a<5)
   {
     if(j>2)
