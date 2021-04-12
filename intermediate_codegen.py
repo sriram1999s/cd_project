@@ -1,4 +1,7 @@
 import re
+import random
+
+
 def solve(i,n,l,inter_code):
     if(i==n):
         return
@@ -13,9 +16,10 @@ def solve(i,n,l,inter_code):
             inter_code.append(quad)
         elif(re.search(r'[+\-*/\^&|]',l[i][0])):
             #print("hey",l[i])
-            quad = [l[i][0],l[i][1],l[i][2],'temp']
+            rand_num = str(random.randint(1,1000))
+            quad = [l[i][0],l[i][1],l[i][2],'temp'+rand_num]
             inter_code.append(quad)
-            l[i] = 'temp'
+            l[i] = 'temp'+rand_num
 
     elif(type(l[i])==list and len(l[i])==3):
         if(type(l[i][2])==list and len(l[i][2])==3 and l[i][0] == '=' and check_type(l[i][2])):
