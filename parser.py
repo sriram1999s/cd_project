@@ -89,6 +89,8 @@ def p_declaration(p):
 
     if(len(p) == 6):
         p[0] = [p[3], p[2], p[4]]
+    else:
+        p[0] = [None]
 
 def p_block(p):
     '''
@@ -389,9 +391,9 @@ def p_factor(p):
     '''
     if(len(p) == 3):
         if(p[1] == '++'):
-            p[0] = ['+', p[2], 1]
+            p[0] = ['+', p[2], 1,p[2]]
         elif(p[1] == '--'):
-            p[0] = ['-', p[2], 1]
+            p[0] = ['-', p[2], 1,p[2]]
         else:
             p[0] = [p[1], p[2], None]
     else:
@@ -414,10 +416,10 @@ def p_brace(p):
         p[0] = p[1]
     elif(len(p) == 3):
         if(p[2] == '++'):
-            p[0] = ['+', p[1], 1]
+            p[0] = ['+', p[1], 1,p[1]]
         else:
-            p[0] = ['-', p[1], 1]
-    else :
+            p[0] = ['-', p[1], 1,p[1]]
+    else:
         p[0] = p[2]
 
 def p_NUM(p):

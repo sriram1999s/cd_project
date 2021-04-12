@@ -1,5 +1,6 @@
-from parser import *
 import sys
+from parser import *
+from intermediate_codegen import *
 
 lexer = lex()
 parser = yacc()
@@ -15,4 +16,9 @@ with open(file) as f:
         lines += line.strip('\n')
     lines.strip('\n')
 
-parser.parse(lines)
+parse_tree = parser.parse(lines)
+inter_code = []
+solve(0,len(parse_tree),parse_tree,inter_code)
+#solve(0,len(parse_tree),parse_tree,inter_code)
+for i in inter_code:
+    print(i)

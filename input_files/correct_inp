@@ -21,4 +21,9 @@ int main()
   }
   else
   d*=7;
+  x=y*z;
+  p=p+1;
+  q=p-4;
+  int r=-7;
+  int t=s*r/q+w-u;
 }
