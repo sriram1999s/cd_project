@@ -52,6 +52,7 @@ tokens = numbers + bin_op + logic + rel_op + assignment + delimiters + statement
 
 
 
+
 # relational operators
 
 t_LE = r'<='
@@ -169,6 +170,7 @@ def t_INCLUDE(t):
     r'include'
     return t
 
+
 # identifiers
 
 def t_ID(t):
@@ -185,6 +187,7 @@ def t_HEADER_FILE(t):
 def t_CHAR(t):
     '\'.\''
     return t
+
 
 # error
 

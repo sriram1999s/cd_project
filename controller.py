@@ -1,6 +1,7 @@
 import sys
 from parser import *
 from intermediate_codegen import *
+from preprocessing import *
 
 lexer = lex()
 parser = yacc()
@@ -13,8 +14,11 @@ except :
 lines = ""
 with open(file) as f:
     for line in f:
-        lines += line.strip('\n')
-    lines.strip('\n')
+        lines += line
+
+lines = preprocess(lines)
+
+print(lines)
 
 parse_tree = parser.parse(lines)
 inter_code = []
