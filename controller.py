@@ -20,5 +20,10 @@ parse_tree = parser.parse(lines)
 inter_code = []
 solve(0,len(parse_tree),parse_tree,inter_code)
 #solve(0,len(parse_tree),parse_tree,inter_code)
+print("\n\nquads\n\n")
 for i in inter_code:
     print(i)
+
+intermediate_code = gen(inter_code)
+print("\n\nICG\n\n")
+print(intermediate_code)

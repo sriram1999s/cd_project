@@ -1,5 +1,6 @@
 from lexer import *
 from ply.yacc import yacc
+from intermediate_codegen import *
 
 # --------------------------------parser------------------------------------ #
 
@@ -31,7 +32,7 @@ def p_multiple_statements(p):
                         | statement
     '''
     if(len(p) == 3):
-        p[0] = p[1] + [p[2]]
+        p[0] = [p[1]] + [p[2]]
     else:
         p[0] = p[1]
 
@@ -389,11 +390,12 @@ def p_factor(p):
            | MINUS_MINUS factor
 	       | brace
     '''
+    print(temp)
     if(len(p) == 3):
         if(p[1] == '++'):
-            p[0] = ['+', p[2], 1,p[2]]
+            p[0] = ['+', p[1], 1,p[1]]
         elif(p[1] == '--'):
-            p[0] = ['-', p[2], 1,p[2]]
+            p[0] = ['-', p[1], 1,p[1]]
         else:
             p[0] = [p[1], p[2], None]
     else:
@@ -412,13 +414,17 @@ def p_brace(p):
     	   | CHAR
            | function_call
     '''
+    global temp
+    print(temp)
     if(len(p) == 2):
         p[0] = p[1]
     elif(len(p) == 3):
         if(p[2] == '++'):
-            p[0] = ['+', p[1], 1,p[1]]
+            p[0] = [['+', p[1], 1,'t'+str(temp[0])],['=','t'+str(temp[0]),None,p[1]]]
+            temp[0]+=1
         else:
-            p[0] = ['-', p[1], 1,p[1]]
+            p[0] = [['-', p[1], 1,'t'+str(temp[0])],['=','t'+str(temp[0]),None,p[1]]]
+            temp[0]+=1
     else:
         p[0] = p[2]
 
