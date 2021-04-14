@@ -4,6 +4,8 @@ from intermediate_codegen import *
 from preprocessing import *
 from constant_folding_and_prop import *
 from deadcode_elimination import *
+from common_subexpression_elimination import *
+from variable_folding import *
 
 lexer = lex()
 parser = yacc()
@@ -31,14 +33,27 @@ for i in inter_code:
 
 
 ''' optimizations '''
+
+
+
 const_fold_prop(inter_code)
 print("\n\nICG AFTER CONSTANT FOLDING AND PROPAGATION:\n")
+print(gen(inter_code))
+
+common_subexpression_eliminate(inter_code)
+print("\n\nICG AFTER COMMON SUBEXPRESSION ELIMINATION:\n")
+print(gen(inter_code))
+
+variable_fold(inter_code)
+print("\n\nICG AFTER VARIABLE FOLDING:\n")
 print(gen(inter_code))
 
 # sym_tab.disp()
 dead_eliminate(inter_code)
 print("\n\nICG AFTER DEAD CODE ELIMINATION:\n")
 print(gen(inter_code))
+
+
 
 # const_propagate(inter_code)
 ''' optimizations end '''
