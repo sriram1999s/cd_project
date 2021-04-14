@@ -2,7 +2,6 @@ from ply.lex import lex
 from symbol_table import *
 
 
-sym_tab = SymbolTable()
 
 '''
 READ THIS BEFORE ADDING CALLABLES

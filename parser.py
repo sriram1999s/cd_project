@@ -17,7 +17,6 @@ def p_start(p):
     '''
     start : multiple_statements
     '''
-    sym_tab.disp()
     print("finished parsing")
 
     p[0] = p[1]
@@ -421,9 +420,15 @@ def p_brace(p):
     elif(len(p) == 3):
         if(p[2] == '++'):
             p[0] = [['+', p[1], 1,'t'+str(temp[0])],['=','t'+str(temp[0]),None,p[1]]]
+
+            sym_tab.add_temp('t'+str(temp[0]))
+
             temp[0]+=1
         else:
             p[0] = [['-', p[1], 1,'t'+str(temp[0])],['=','t'+str(temp[0]),None,p[1]]]
+
+            sym_tab.add_temp('t'+str(temp[0]))
+
             temp[0]+=1
     else:
         p[0] = p[2]
