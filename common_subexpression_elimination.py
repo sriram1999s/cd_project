@@ -14,7 +14,8 @@ def check_collision(start,end,quads):
 
 def common_subexpression_eliminate(quads):
     n = len(quads)
-    d = defaultdict(lambda:'0') 
+    d = defaultdict(lambda:'0')
+    
     for i in range(n):
         if(type(quads[i])==list and quads[i]!=[]):
             for j in range(i+1,n):
@@ -22,6 +23,7 @@ def common_subexpression_eliminate(quads):
                     if(quads[i][-1]!=quads[j][-1] and quads[i][:-1] == quads[j][:-1] and check_collision(i,j,quads)):
                         d[quads[j][-1]] = quads[i][-1]
                         quads[j].clear()
+    
 
 
     #substi the CSE from dictionary                    

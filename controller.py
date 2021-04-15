@@ -40,12 +40,12 @@ const_fold_prop(inter_code)
 print("\n\nICG AFTER CONSTANT FOLDING AND PROPAGATION:\n")
 print(gen(inter_code))
 
-common_subexpression_eliminate(inter_code)
-print("\n\nICG AFTER COMMON SUBEXPRESSION ELIMINATION:\n")
-print(gen(inter_code))
-
 variable_fold(inter_code)
 print("\n\nICG AFTER VARIABLE FOLDING:\n")
+print(gen(inter_code))
+
+common_subexpression_eliminate(inter_code)
+print("\n\nICG AFTER COMMON SUBEXPRESSION ELIMINATION:\n")
 print(gen(inter_code))
 
 # sym_tab.disp()
@@ -59,6 +59,6 @@ print(gen(inter_code))
 ''' optimizations end '''
 
 
-intermediate_code = gen(inter_code)
-print("\n\nICG FINAL:\n")
-print(intermediate_code)
+# intermediate_code = gen(inter_code)
+# print("\n\nICG FINAL:\n")
+# print(intermediate_code)
