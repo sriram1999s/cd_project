@@ -20,7 +20,7 @@ def p_start(p):
     print("finished parsing")
 
     p[0] = p[1]
-    print(p[0])
+    # print(p[0])
 
 
 

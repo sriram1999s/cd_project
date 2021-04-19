@@ -22,6 +22,7 @@ with open(file) as f:
 
 lines = preprocess(lines)
 
+print("PREPROCESSED INPUT:\n")
 print(lines)
 
 parse_tree = parser.parse(lines)
@@ -35,6 +36,8 @@ for i in inter_code:
 ''' optimizations '''
 
 
+print("\n\nICG BEFORE OPTIMIZATIONS:\n")
+print(gen(inter_code))
 
 const_fold_prop(inter_code)
 print("\n\nICG AFTER CONSTANT FOLDING AND PROPAGATION:\n")
